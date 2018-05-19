@@ -1,3 +1,6 @@
+// module.exports = {
+//     "extends": "airbnb",
+// };
 module.exports = {
 	env: {
 		browser: true,
@@ -11,7 +14,12 @@ module.exports = {
 		ecmaFeatures: {
 			experimentalObjectRestSpread: true,
 			modules: true,
-			jsx: true,		
+			jsx: true,
+			allowImportExportEverywhere: false,
+			codeFrame: false,
+			'arrow-body-style': 'off',
+			'no-console': 'off',
+			'no-continue': 'off',
 		},
 		sourceType: 'module',
 	},
@@ -22,5 +30,7 @@ module.exports = {
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
 		'no-console': 'off',
+		'react/prop-types': ['error', { ignore: ['navigation', 'focused'] }],
+		'react/display-name': [0, { ignoreTranspilerName: true }],
 	},
 };
