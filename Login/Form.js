@@ -1,22 +1,12 @@
+import { View } from 'native-base';
 import React, { Component } from 'react';
-import {
-	Image,
-	KeyboardAvoidingView,
-	StyleSheet,
-	TouchableOpacity,
-	Text,
-	Dimensions,
-	Animated,
-	Easing,
-	Alert,
-} from 'react-native';
+import { Alert, Animated, Dimensions, Easing, Image, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import UserInput from './UserInput';
 import eyeImg from './assets/eye_black.png';
+import spinner from './assets/loading.gif';
 import passwordImg from './assets/password.png';
 import usernameImg from './assets/username.png';
-import UserInput from './UserInput';
-import { Actions } from 'react-native-router-flux';
-import { View } from 'native-base';
-import spinner from './assets/loading.gif';
 import { firebaseApp } from './firebaseConfig';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 // const DEVICE_HEIGHT = Dimensions.get('window').height;

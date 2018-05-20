@@ -2,12 +2,13 @@ import Expo from 'expo';
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import RootNavigation from './navigation/RootNavigation';
+import Main from './Login/Main';
 
 export default class App extends React.Component {
 	state = {
 		isLoadingComplete: false,
 	};
-	async componentWillMount() {
+	async componentDidMount() {
 		await Expo.Font.loadAsync({
 			'Roboto': require('./assets/Font/Roboto.ttf'),
 			'Roboto_medium': require('./assets/Font/Roboto_medium.ttf'),
@@ -16,10 +17,13 @@ export default class App extends React.Component {
 	}
 
 	render() {
+		if (!this.state.isLoadingComplete) {
+			return <Expo.AppLoading />;
+		}
 		return (
 			<View style={styles.container}>
 				{Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-				<RootNavigation />
+				<Main />
 			</View>
 		);
 	}

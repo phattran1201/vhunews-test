@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ButtonSubmit from './ButtonSubmit';
+import { StyleSheet, View } from 'react-native';
 import Form from './Form';
 import Logo from './Logo';
-import SignupSection from './SignupSection';
 import Wallpaper from './Wallpaper';
-import { StyleSheet, Text, View } from 'react-native';
 
 
 export default class LoginScreen extends Component {

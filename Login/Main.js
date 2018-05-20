@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Scene } from 'react-native-router-flux';
-import LoginScreen from './LoginScreen';
 import RootNavigation from '../navigation/RootNavigation';
+import LoginScreen from './LoginScreen';
 import QuenMatKau from './QuenMatKau';
 import Register from './Register';
 
@@ -23,9 +23,19 @@ export default class Main extends Component {
 						animation="fade"
 						hideNavBar={true}
 					/>
-					
-					<Scene key="quenmatkau" component={QuenMatKau} animation="fade" title="Quenpassword" />
-					<Scene key="register" component={Register}  hideNavBar={true} title="Register" />
+
+					<Scene
+						key="quenmatkau"
+						component={QuenMatKau}
+						animation="fade"
+						title="Quenpassword"
+					/>
+					<Scene
+						key="register"
+						component={Register}
+						hideNavBar={true}
+						title="Register"
+					/>
 				</Scene>
 			</Router>
 		);
