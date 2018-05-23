@@ -12,7 +12,7 @@ import TruyenTNB from './TruyenTNB';
 // import TruyenMH from './TruyenMH';
 // import TruyenTB from './TruyenTB';
 import TruyenTT from './TruyenTT';
-
+import ThongTinCaNhan from '../Login/thongtincanhan';
 export default TabNavigator(
 	{
 		//   'Cài Đặt': {
@@ -39,9 +39,9 @@ export default TabNavigator(
 		'VHU 360': {
 			screen: TabSwipe,
 		},
-		// 'SideBar': {
-		//   screen: SideBar,
-		// },
+		'SideBar': {
+		  screen: ThongTinCaNhan,
+		},
 	},
 	{
 		navigationOptions: ({ navigation }) => ({

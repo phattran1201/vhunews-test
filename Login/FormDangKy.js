@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { Animated, Dimensions, Easing, Image, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View,Alert } from 'react-native';
+import {
+	Animated,
+	Dimensions,
+	Easing,
+	Image,
+	KeyboardAvoidingView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+	Alert,
+} from 'react-native';
 import eyeImg from './assets/eye_black.png';
 import spinner from './assets/loading.gif';
 import passwordImg from './assets/password.png';
@@ -12,15 +23,18 @@ import { Actions } from 'react-native-router-flux';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 // const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
-
+console.ignoredYellowBox = ['Setting a timer'];
 export default class FormDangKy extends Component {
 	constructor(props) {
 		super(props);
+		this.itemRef = firebaseApp.database().ref('SinhVien');
 		this.state = {
 			showPass: true,
 			press: false,
 			email: '',
 			password: '',
+			mssv: '',
+			sdt: '',
 		};
 		console.log(this.state);
 		this.showPass = this.showPass.bind(this);
@@ -36,13 +50,18 @@ export default class FormDangKy extends Component {
 	}
 
 	signupUser() {
+		// const userId = firebaseApp.auth().currentUser.uid;
 		firebaseApp
 			.auth()
 			.createUserWithEmailAndPassword(this.state.email, this.state.password)
-			.then(() => {
-				// console.log();
-				// if (this.loginUser(this.state.email, this.state.password)) return;
-				// this.loginUser(this.state.email, this.state.password);
+			.then(() => {				
+				this.itemRef.child(firebaseApp.auth().currentUser.uid).set({
+					email: this.state.email,
+					// password: this.state.password,
+					mssv: this.state.mssv,
+					sdt: this.state.sdt,
+				});
+				
 				this.setState({ isLoading: true });
 				Animated.timing(this.buttonAnimated, {
 					toValue: 1,
@@ -59,15 +78,15 @@ export default class FormDangKy extends Component {
 				}, 2000);
 
 				setTimeout(() => {
-					Actions.RootNavigation();
+					// Actions.thongtincanhan({
+					// 	email: this.state.mssv,
+					// });
+					Actions.loginScreen();
+					
 					this.setState({ isLoading: false });
 					this.buttonAnimated.setValue(0);
 					this.growAnimated.setValue(0);
 				}, 2000);
-				this.setState({
-					email: '',
-					password: '',
-				});
 			})
 			.catch(function() {
 				Alert.alert(
@@ -84,7 +103,6 @@ export default class FormDangKy extends Component {
 							onPress: () => Actions.pop(),
 							style: 'cancel',
 						},
-						
 					],
 					{ cancelable: false }
 				);
@@ -145,7 +163,6 @@ export default class FormDangKy extends Component {
 		});
 
 		return (
-			
 			<KeyboardAvoidingView behavior="padding" style={styles.container}>
 				<UserInput
 					source={usernameImg}
@@ -172,17 +189,16 @@ export default class FormDangKy extends Component {
 					autoCapitalize={'none'}
 					autoCorrect={false}
 					onChangeText={password => this.setState({ password })}
-				/>
+				/> */}
 				<UserInput
 					source={passwordImg}
-					secureTextEntry={this.state.showPass}
 					placeholder="Mã số sinh viên"
 					returnKeyType={'done'}
 					autoCapitalize={'none'}
 					autoCorrect={false}
-					onChangeText={password => this.setState({ password })}
+					onChangeText={mssv => this.setState({ mssv })}
 				/>
-				<UserInput
+				{/* <UserInput
 					source={passwordImg}
 					secureTextEntry={this.state.showPass}
 					placeholder="Khoa"
@@ -191,17 +207,16 @@ export default class FormDangKy extends Component {
 					autoCorrect={false}
 					onChangeText={password => this.setState({ password })}
 				/>
-				
+				 */}
 				<UserInput
 					source={passwordImg}
-					secureTextEntry={this.state.showPass}
 					placeholder="Số điện thoại"
 					returnKeyType={'done'}
 					autoCapitalize={'none'}
 					autoCorrect={false}
-					onChangeText={password => this.setState({ password })}
+					onChangeText={sdt => this.setState({ sdt })}
 				/>
-				 */}
+
 				<TouchableOpacity
 					activeOpacity={0.7}
 					style={styles.btnEye}
@@ -228,8 +243,6 @@ export default class FormDangKy extends Component {
 					</Animated.View>
 				</View>
 			</KeyboardAvoidingView>
-				
-			
 		);
 	}
 }

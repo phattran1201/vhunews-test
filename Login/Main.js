@@ -4,6 +4,7 @@ import RootNavigation from '../navigation/RootNavigation';
 import LoginScreen from './LoginScreen';
 import QuenMatKau from './QuenMatKau';
 import Register from './Register';
+import ThongTinCaNhan from './thongtincanhan';
 
 export default class Main extends Component {
 	render() {
@@ -29,6 +30,12 @@ export default class Main extends Component {
 						component={QuenMatKau}
 						animation="fade"
 						title="Quenpassword"
+					/>
+					<Scene
+						key="thongtincanhan"
+						component={ThongTinCaNhan}
+						animation="fade"
+						hideNavBar={true}
 					/>
 					<Scene
 						key="register"

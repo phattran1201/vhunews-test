@@ -15,12 +15,16 @@ const MARGIN = 40;
 export default class Form extends Component {
 	constructor(props) {
 		super(props);
+		this.unsubscriber = null;
 		this.state = {
 			showPass: true,
 			press: false,
 			isLoading: false,
+			isAuthenticated: false,
+			user: null,
 			email: '',
-			password: '',
+			password: '',			
+		
 		};
 		this.showPass = this.showPass.bind(this);
 		this.buttonAnimated = new Animated.Value(0);
@@ -34,39 +38,90 @@ export default class Form extends Component {
 			? this.setState({ showPass: false, press: true })
 			: this.setState({ showPass: true, press: false });
 	}
-	loginUser() {
+	componentDidMount() {
+		this.unsubscriber = firebaseApp.auth().onAuthStateChanged(changedUser => {
+			// console.log(`changed User : ${JSON.stringify(changedUser.toJSON())}`);
+			this.setState({ user: changedUser });
+			if (changedUser != null) {
+				Actions.RootNavigation();	
+			}
+					
+		});
+	}
+	componentWillUnmount() {
+		if (this.unsubscriber) {
+			this.unsubscriber();
+		
+		}
+	}
+	onAnonymousLogin = () => {
 		firebaseApp
 			.auth()
-			.signInWithEmailAndPassword(this.state.email, this.state.password)
+			.signInAnonymously()
 			.then(() => {
-				// console.log();
-				// if (this.loginUser(this.state.email, this.state.password)) return;
-				// this.loginUser(this.state.email, this.state.password);
-				this.setState({ isLoading: true });
+				console.log('Login successfully');
+				this.setState({ isAuthenticated: true, isLoading: true});
 				Animated.timing(this.buttonAnimated, {
 					toValue: 1,
 					duration: 200,
 					easing: Easing.linear,
-				}).start();
-
-				setTimeout(() => {
+				}).start();				
+				setTimeout(() => {	
 					Animated.timing(this.growAnimated, {
 						toValue: 1,
 						duration: 200,
 						easing: Easing.linear,
-					}).start();
-				}, 2000);
-
-				setTimeout(() => {
+					}).start();				
 					Actions.RootNavigation();
 					this.setState({ isLoading: false });
 					this.buttonAnimated.setValue(0);
 					this.growAnimated.setValue(0);
 				}, 2000);
-				this.setState({
-					email: '',
-					password: '',
-				});
+				
+			})
+			.catch(function() {
+				Alert.alert(
+					'Cảnh báo',
+					'Đăng nhập thất bại1',
+					[
+						// {
+						// 	text: 'Ask me later',
+						// 	onPress: () => Actions.pop(),
+						// },
+						{ text: 'OK', onPress: () => Actions.refresh() },
+						{
+							text: 'Hủy',
+							onPress: () => Actions.pop(),
+							style: 'cancel',
+						},
+						
+					],
+					{ cancelable: false }
+				);
+			});
+	}
+	loginUser() {
+		firebaseApp
+			.auth()
+			.signInWithEmailAndPassword(this.state.email, this.state.password)
+			.then(() => {
+				this.setState({ isLoading: true});
+				Animated.timing(this.buttonAnimated, {
+					toValue: 1,
+					duration: 200,
+					easing: Easing.linear,
+				}).start();				
+				setTimeout(() => {	
+					Animated.timing(this.growAnimated, {
+						toValue: 1,
+						duration: 200,
+						easing: Easing.linear,
+					}).start();				
+					Actions.RootNavigation();
+					this.setState({ isLoading: false });
+					this.buttonAnimated.setValue(0);
+					this.growAnimated.setValue(0);
+				}, 2000);
 			})
 			.catch(function() {
 				Alert.alert(
@@ -89,40 +144,7 @@ export default class Form extends Component {
 				);
 			});
 	}
-	// _onPress() {
-	// 	// if (this.loginUser(this.state.email, this.state.password)) return;
-	// 	// this.loginUser(this.state.email, this.state.password);
-	// 	this.setState({ isLoading: true });
-	// 	Animated.timing(this.buttonAnimated, {
-	// 		toValue: 1,
-	// 		duration: 200,
-	// 		easing: Easing.linear,
-	// 	}).start();
-
-	// 	setTimeout(() => {
-	// 		Animated.timing(this.growAnimated, {
-	// 			toValue: 1,
-	// 			duration: 200,
-	// 			easing: Easing.linear,
-	// 		}).start();
-	// 	}, 2000);
-
-	// 	setTimeout(() => {
-	// 		firebaseApp.auth().signOut();
-	// 		Actions.secondScreen();
-	// 		this.setState({ isLoading: false });
-	// 		this.buttonAnimated.setValue(0);
-	// 		this.growAnimated.setValue(0);
-	// 	}, 2000);
-	// }
-
-	// _onGrow() {
-	// 	Animated.timing(this.growAnimated, {
-	// 		toValue: 1,
-	// 		duration: 200,
-	// 		easing: Easing.linear,
-	// 	}).start();
-	// }
+	
 	render() {
 		const changeWidth = this.buttonAnimated.interpolate({
 			inputRange: [0, 1],
@@ -179,7 +201,7 @@ export default class Form extends Component {
 							style={[styles.circle, { transform: [{ scale: changeScale }] }]}
 						/>
 					</Animated.View>
-				</View>
+				</View>				
 				<View style={styles.container1}>
 					<Animated.View style={{ width: changeWidth }}>
 						<TouchableOpacity
@@ -191,6 +213,24 @@ export default class Form extends Component {
 								<Image source={spinner} style={styles.image} />
 							) : (
 								<Text style={styles.text}>ĐĂNG KÝ</Text>
+							)}
+						</TouchableOpacity>
+						<Animated.View
+							style={[styles.circle, { transform: [{ scale: changeScale }] }]}
+						/>
+					</Animated.View>
+				</View>
+				<View style={styles.container1}>
+					<Animated.View style={{ width: changeWidth }}>
+						<TouchableOpacity
+							style={styles.button2}
+							onPress={this.onAnonymousLogin}
+							activeOpacity={1}
+						>
+							{this.state.isLoading ? (
+								<Image source={spinner} style={styles.image} />
+							) : (
+								<Text style={styles.text}>ĐĂNG NHẬP QUYỀN KHÁCH</Text>
 							)}
 						</TouchableOpacity>
 						<Animated.View
@@ -236,6 +276,14 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#090',
+		height: MARGIN,
+		borderRadius: 20,
+		zIndex: 100,
+	},
+	button2: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#000',
 		height: MARGIN,
 		borderRadius: 20,
 		zIndex: 100,
