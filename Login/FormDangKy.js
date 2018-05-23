@@ -51,6 +51,10 @@ export default class FormDangKy extends Component {
 
 	signupUser() {
 		// const userId = firebaseApp.auth().currentUser.uid;
+		if (this.state.password.length < 6) {
+			alert('Password hơn 6 chữ');
+			return;
+		}
 		firebaseApp
 			.auth()
 			.createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -108,50 +112,7 @@ export default class FormDangKy extends Component {
 				);
 			});
 	}
-	// signupUser = (email, password) => {
-	// 	try {
-	// 		if (this.state.password.length < 6) {
-	// 			alert('Password hơn 6 chữ');
-	// 			return;			}
-	// 		firebaseApp.auth().createUserWithEmailAndPassword(email, password);
-	// 	} catch (error) {
-	// 		console.log(error.toString());
-	// 	}
-	// };
-
-	// signupUser() {
-	// 	if (this.state.isLoading) return;
-	// 	this.signupUser(this.state.email, this.state.password);
-	// 	this.setState({ isLoading: true });
-	// 	Animated.timing(this.buttonAnimated, {
-	// 		toValue: 1,
-	// 		duration: 200,
-	// 		easing: Easing.linear,
-	// 	}).start();
-
-	// 	setTimeout(() => {
-	// 		this._onGrow();
-	// 	}, 2000);
-
-	// 	setTimeout(() => {
-	// 		// Actions.secondScreen();
-
-	// 		console.log(this.Dangky);
-	// 		this.setState({ isLoading: false });
-
-	// 		this.buttonAnimated.setValue(0);
-	// 		this.growAnimated.setValue(0);
-	// 	}, 2300);
-	// }
-
-	// _onGrow() {
-	// 	Animated.timing(this.growAnimated, {
-	// 		toValue: 1,
-	// 		duration: 200,
-	// 		easing: Easing.linear,
-	// 	}).start();
-	// }
-
+	
 	render() {
 		const changeWidth = this.buttonAnimated.interpolate({
 			inputRange: [0, 1],

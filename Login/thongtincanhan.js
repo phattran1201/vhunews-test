@@ -1,13 +1,13 @@
-import { Container, Content, Icon, ListItem, Separator, Text, Button } from 'native-base';
+import { Container, Content, Icon, ListItem, Separator, Text } from 'native-base';
 import React from 'react';
 import { ListView, Platform, focused } from 'react-native';
-import { firebaseApp } from './firebaseConfig';
 import { Actions } from 'react-native-router-flux';
+import { firebaseApp } from './firebaseConfig';
 
 export default class ThongTinCaNhan extends React.Component {
 	constructor(props) {
 		super(props);
-		this.itemRef = firebaseApp.database();
+
 		this.state = {
 			dataSource: new ListView.DataSource({
 				rowHasChanged: (r1, r2) => r1 !== r2,
@@ -52,11 +52,12 @@ export default class ThongTinCaNhan extends React.Component {
 		headerTintColor: '#fff',
 	});
 
-	ListForItem(itemRef) {
+	componentDidMount() {
 		var items = [];
 		const userId = firebaseApp.auth().currentUser.uid;
 		console.log(userId);
-		this.itemRef
+		firebaseApp
+			.database()
 			.ref('SinhVien')
 			.child(userId)
 			.on('child_added', dataSnapshot => {
@@ -95,11 +96,7 @@ export default class ThongTinCaNhan extends React.Component {
 				<Content>
 					<Text onPress={this.thoat}>thoat</Text>
 				</Content>
-				
 			</Container>
 		);
-	}
-	componentDidMount() {
-		this.ListForItem(this.itemRef);
 	}
 }
