@@ -1,6 +1,6 @@
-import { Container, Content, Icon, ListItem, Separator, Text } from 'native-base';
+import { Button, Container, Content, Footer, Icon, ListItem, Separator, Text } from 'native-base';
 import React from 'react';
-import { ListView, Platform, focused } from 'react-native';
+import { Image, ListView, Platform, focused } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { firebaseApp } from './firebaseConfig';
 
@@ -77,13 +77,39 @@ export default class ThongTinCaNhan extends React.Component {
 
 	render() {
 		return (
-			<Container>
-				<Content>
-					<ListView
+			<Container style={{flex:1}}>
+				<Content style={{flex:1}}>
+					<Image
+						source={{
+							uri:
+								'https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/drawer-cover.png',
+						}}
+						style={{
+							height: 150,
+							width: '100%',
+							alignSelf: 'stretch',
+							position: 'absolute',
+						}}
+					/>
+					<Image
+						square
+						style={{
+							marginTop: 24,
+							height: 80,
+							width: 150,
+							position: 'absolute',
+							alignSelf: 'center',
+							top: 20,
+						}}
+						source={{
+							uri: 'http://eoffice.vhu.edu.vn/App/assets/img/VHU_logo.png',
+						}}
+					/>
+					<ListView  style={{ marginTop: 160}}
 						dataSource={this.state.dataSource}
 						renderRow={rowData => (
 							<Content>
-								<Separator bordered>
+								<Separator itemDivider>		
 									<Text>{rowData.key}</Text>
 								</Separator>
 								<ListItem>
@@ -92,10 +118,15 @@ export default class ThongTinCaNhan extends React.Component {
 							</Content>
 						)}
 					/>
+				
 				</Content>
-				<Content>
-					<Text onPress={this.thoat}>thoat</Text>
-				</Content>
+				<Footer   style={{backgroundColor:'#fff'}} >
+					<Button  rounded>
+						
+						<Text onPress={this.thoat}>Thay đổi thông tin</Text>
+					</Button>
+				</Footer>
+				
 			</Container>
 		);
 	}

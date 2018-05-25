@@ -12,6 +12,7 @@ import TruyenMH from './TruyenMH';
 import TruyenTB from './TruyenTB';
 import TruyenTNB from './TruyenTNB';
 import TruyenTT from './TruyenTT';
+import ThongTinCaNhan from '../Login/thongtincanhan';
 
 const RootStackNavigator = StackNavigator(
 	{
@@ -24,7 +25,6 @@ const RootStackNavigator = StackNavigator(
 		'Cài Đặt': {
 			screen: CaiDat,
 		},
-		
 
 		'Thông Báo': {
 			screen: TruyenTB,
@@ -33,9 +33,9 @@ const RootStackNavigator = StackNavigator(
 			screen: TruyenTNB,
 		},
 
-		// 'Thảo Luận': {
-		//   screen: TruyenMH,
-		// },
+		'Thông tin cá nhân': {
+			screen: ThongTinCaNhan,
+		},
 
 		Swiper: {
 			screen: TabSwipe,
@@ -43,7 +43,7 @@ const RootStackNavigator = StackNavigator(
 		'Hỏi Đáp': {
 			screen: TruyenMH,
 		},
-		'Đăng Xuất': {
+		'Login': {
 			screen: Main,
 		},
 	},
@@ -59,7 +59,7 @@ const TrangChuRouter = DrawerNavigator(
 		TrangChu: { screen: RootStackNavigator },
 	},
 	{
-		contentComponent: props => <SideBar {...props}/>,
+		contentComponent: props => <SideBar {...props} />,
 	}
 );
 

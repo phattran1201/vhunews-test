@@ -35,7 +35,7 @@ export default class Main extends Component {
 						key="thongtincanhan"
 						component={ThongTinCaNhan}
 						animation="fade"
-						hideNavBar={true}
+						hideNavBar={false}
 					/>
 					<Scene
 						key="register"

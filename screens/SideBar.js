@@ -1,8 +1,12 @@
 import { Button, Container, Content, Icon, List, Text } from 'native-base';
 import React from 'react';
 import { Image, Linking, Platform, focused } from 'react-native';
-
+import { firebaseApp } from '../Login/firebaseConfig';
 export default class SideBar extends React.Component {
+	thoat() {
+		firebaseApp.auth().signOut();
+		this.props.navigation.navigate('Login');
+	}
 	render() {
 		// const {navigator} = this.props.navigation;
 		return (
@@ -50,10 +54,10 @@ export default class SideBar extends React.Component {
 							/>
 							<Text style={{ color: '#09f', width: '100%' }}>VHU News</Text>
 						</Button>
-						{/* <Button   transparent   >
-            <Icon style={{color: '#09f' }}  name = {Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'} />
-            <Text style={{color: '#09f',width:'100%'}}>Thông tin cá nhân</Text>
-          </Button> */}
+						<Button   transparent  onPress={() => this.props.navigation.navigate('Thông tin cá nhân')} >
+							<Icon style={{color: '#09f' }}  name = {Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'} />
+							<Text style={{color: '#09f',width:'100%'}}>Thông tin cá nhân</Text>
+						</Button>
 						<Button
 							transparent
 							onPress={() => this.props.navigation.navigate('Thông Báo')}
@@ -118,10 +122,10 @@ export default class SideBar extends React.Component {
 								Góp Ý - Báo Lỗi
 							</Text>
 						</Button>
-						{/* <Button   transparent  >
-            <Icon style={{color: '#09f' }} name = {Platform.OS === 'ios' ? `ios-exit${focused ? '' : '-outline'}` : 'md-exit'}  />
-            <Text style={{color: '#09f',width:'100%'}}>Đăng xuất</Text>
-          </Button> */}
+						<Button   transparent  >
+							<Icon style={{color: '#09f' }} name = {Platform.OS === 'ios' ? `ios-exit${focused ? '' : '-outline'}` : 'md-exit'}  />
+							<Text style={{color: '#09f',width:'100%'}}>Đăng xuất</Text>
+						</Button>
 					</List>
 				</Content>
 			</Container>

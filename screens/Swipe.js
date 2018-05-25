@@ -101,7 +101,7 @@ export default class Swipe extends Component {
 									<Left>
 										<Thumbnail source={item.image} />
 										<Body>
-											<Text>dsad</Text>
+											<Text>Trần Phát</Text>
 											<Text note>{item.TIME}</Text>
 										</Body>
 									</Left>

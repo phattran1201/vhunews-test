@@ -40,11 +40,27 @@ export default class Form extends Component {
 	}
 	componentDidMount() {
 		this.unsubscriber = firebaseApp.auth().onAuthStateChanged(changedUser => {
-			// console.log(`changed User : ${JSON.stringify(changedUser.toJSON())}`);
-			this.setState({ user: changedUser });
-			if (changedUser != null) {
-				Actions.RootNavigation();	
-			}
+			console.log(`changed User : ${JSON.stringify(changedUser.toJSON())}`);
+			// this.setState({ user: changedUser });
+			// if (changedUser != null) {
+			// 	this.setState({ isLoading: true});
+			// 	Animated.timing(this.buttonAnimated, {
+			// 		toValue: 1,
+			// 		duration: 200,
+			// 		easing: Easing.linear,
+			// 	}).start();				
+			// 	setTimeout(() => {	
+			// 		Animated.timing(this.growAnimated, {
+			// 			toValue: 1,
+			// 			duration: 200,
+			// 			easing: Easing.linear,
+			// 		}).start();				
+			Actions.RootNavigation();
+			// 		this.setState({ isLoading: false });
+			// 		this.buttonAnimated.setValue(0);
+			// 		this.growAnimated.setValue(0);					
+			// 	}, 100);
+			// }
 					
 		});
 	}
@@ -60,7 +76,7 @@ export default class Form extends Component {
 			.signInAnonymously()
 			.then(() => {
 				console.log('Login successfully');
-				this.setState({ isAuthenticated: true, isLoading: true});
+				this.setState({ isLoading: true});
 				Animated.timing(this.buttonAnimated, {
 					toValue: 1,
 					duration: 200,
@@ -76,6 +92,7 @@ export default class Form extends Component {
 					this.setState({ isLoading: false });
 					this.buttonAnimated.setValue(0);
 					this.growAnimated.setValue(0);
+					this.setState({ isAuthenticated: true});
 				}, 2000);
 				
 			})
