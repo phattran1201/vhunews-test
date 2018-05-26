@@ -3,7 +3,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { TabBarBottom, TabNavigator } from 'react-navigation';
 import Colors from '../constants/Colors';
-import TabSwipe from './TabSwipe';
+import TruyenVHU360 from './TruyenVHU360';
 import TruyenHD from './TruyenHD';
 // import Swipe from '../screens/Swipe';
 import TruyenTNB from './TruyenTNB';
@@ -36,7 +36,7 @@ export default TabNavigator(
 		},
 
 		'VHU 360': {
-			screen: TabSwipe,
+			screen: TruyenVHU360,
 		},
 		// SideBar: {
 		// 	screen: ThongTinCaNhan,

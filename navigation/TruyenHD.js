@@ -1,15 +1,15 @@
 // import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import GetLink from '../screens/GetLink';
-import HD from '../screens/HD';
+import HoatDong from '../screens/HoatDong';
 
 export default  StackNavigator(
 	{
-		HD: { screen: HD },
+		HoatDong: { screen: HoatDong },
 		GetLink: { screen: GetLink },
 	},
 	{
-		initialRouteName: 'HD',
+		initialRouteName: 'HoatDong',
 		headerMode: 'screen',
 	}
 );

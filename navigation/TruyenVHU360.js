@@ -1,15 +1,16 @@
 // import React from 'react';
 import { StackNavigator } from 'react-navigation';
+import VHU360 from '../screens/VHU360';
 import GetLink from '../screens/GetLink';
-import ThongBao from '../screens/ThongBao';
 
 export default  StackNavigator(
 	{
-		ThongBao: { screen: ThongBao },
+		VHU360: { screen: VHU360 },
 		GetLink: { screen: GetLink },
+
 	},
 	{
-		initialRouteName: 'ThongBao',
-		headerMode: 'screen',
+		initialRouteName: 'VHU360',
+		headerMode: 'screen'
 	}
 );

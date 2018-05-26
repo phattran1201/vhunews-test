@@ -7,7 +7,7 @@ import CaiDat from '../screens/CaiDat';
 // import HomeScreen from '../screens/HomeScreen';
 import SideBar from '../screens/SideBar';
 import MainTabNavigator from './MainTabNavigator';
-import TabSwipe from './TabSwipe';
+import TruyenVHU360 from './TruyenVHU360';
 import TruyenMH from './TruyenMH';
 import TruyenTB from './TruyenTB';
 import TruyenTNB from './TruyenTNB';
@@ -37,8 +37,8 @@ const RootStackNavigator = StackNavigator(
 			screen: ThongTinCaNhan,
 		},
 
-		Swiper: {
-			screen: TabSwipe,
+		'TruyenVHU360': {
+			screen: TruyenVHU360,
 		},
 		'Hỏi Đáp': {
 			screen: TruyenMH,

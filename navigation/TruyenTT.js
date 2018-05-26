@@ -1,15 +1,15 @@
 // import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import GetLink from '../screens/GetLink';
-import TT from '../screens/TT';
+import TinTuc from '../screens/TinTuc';
 
 export default  StackNavigator(
 	{
-		TT: { screen: TT },
+		TinTuc: { screen: TinTuc },
 		GetLink: { screen: GetLink },
 	},
 	{
-		initialRouteName: 'TT',
+		initialRouteName: 'TinTuc',
 		headerMode: 'screen',
 	}
 );

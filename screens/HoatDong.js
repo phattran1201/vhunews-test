@@ -3,7 +3,7 @@ import React from 'react';
 import { FlatList, Image, Platform, Text, TouchableOpacity, View, focused } from 'react-native';
 // import GetLink from './GetLink';
 
-export default class HD extends React.Component {
+export default class HoatDong extends React.Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerLeft: (
 			<Icon

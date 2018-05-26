@@ -94,6 +94,7 @@ class BanTin extends Component {
 			<Container>
 				<ScrollView>
 					<FlatList
+					
 						data={this.state.mang}
 						renderItem={({ item }) => (
 							<Card>
@@ -128,9 +129,12 @@ class BanTin extends Component {
 											onPress={() => alert('Chạm TIM nhẹ hoy nhen !')}
 										>
 											<Icon
-												style={{ color: 'white' }}
-												name="ios-heart-outline"
-												// style={{ color: 'black' }}
+												style={{ color: '#696969' }}
+												name={
+													Platform.OS === 'ios'
+														? `ios-heart${focused ? '' : '-outline'}`
+														: 'md-heart'
+												}	
 											/>
 										</Button>
 										<Button
@@ -138,8 +142,13 @@ class BanTin extends Component {
 											onPress={() => alert('Chạm CHAT nhẹ hoy nhen !')}
 										>
 											<Icon
-												name="ios-chatbubbles-outline"
-												style={{ color: 'black' }}
+												style={{ color: '#696969' }}
+												name={
+													Platform.OS === 'ios'
+														? `ios-chatbubbles${focused ? '' : '-outline'}`
+														: 'md-chatbubbles'
+												}
+												
 											/>
 										</Button>
 										<Button
@@ -153,8 +162,12 @@ class BanTin extends Component {
 											// onPress={() => alert("Chạm Share nhẹ hoy nhen !")}
 										>
 											<Icon
-												style={{ color: 'white' }}
-												name="ios-share-alt-outline"
+												style={{ color: '#696969' }}
+												name={
+													Platform.OS === 'ios'
+														? `ios-share${focused ? '' : '-outline'}`
+														: 'md-share'
+												}
 												// style={{ color: 'black' }}
 											/>
 										</Button>

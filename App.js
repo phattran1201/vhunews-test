@@ -2,9 +2,9 @@ import Expo from 'expo';
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import RootNavigation from './navigation/RootNavigation';
-import Main from './Login/Main';
-import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated']);
+// import Main from './Login/Main';
+// import { YellowBox } from 'react-native';
+// YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated']);
 
 export default class App extends React.Component {
 	state = {
@@ -25,7 +25,7 @@ export default class App extends React.Component {
 		return (
 			<View style={styles.container}>
 				{Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-				<Main />
+				<RootNavigation />
 			</View>
 		);
 	}
